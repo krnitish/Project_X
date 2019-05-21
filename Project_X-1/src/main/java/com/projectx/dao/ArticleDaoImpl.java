@@ -75,20 +75,12 @@ public class ArticleDaoImpl implements ArticleDao{
 
 	@Override
 	public String checkLogin(String id, String pwd) {
-		if(repo.existsById(id))
+		if(repo.getOne(id).equals(pwd))
 		{
-			Users user=repo.getOne(id);
-			if(user.getPwd().equals(pwd))
-			{
-				return "validUser";
-			}else {
-				return "invalidPwd";
-			}
+			return "validUser";
 		}else {
 			return "invalidUser";
 		}
-		
-		
 	}
 
 }
