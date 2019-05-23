@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projectx.entity.Article;
+import com.projectx.entity.LoginInfo;
 import com.projectx.entity.Users;
 import com.projectx.repository.AppRepository;
 import com.projectx.service.ArticleService;
@@ -53,14 +55,15 @@ public class AppController {
 		repo.save(user);
 		return "user created";
 	}
-	@GetMapping("/login/{id}/{pwd}")
-	public ResponseEntity<Object> loginCheck(@PathVariable String id, @PathVariable String pwd)
+	@PostMapping("/login")
+	public ResponseEntity<Object> loginCheck(@RequestBody LoginInfo info)
 	{
-		System.out.println("username: "+id+" Password: "+pwd);
-		Users user=service.checkLogin(id, pwd);
+		System.out.println("username: "+info.getUsername()+" Password: "+info.getPassword());
+		Users user=service.checkLogin(info.getUsername(), info.getPassword());
+		user.setPassword("******");
 		System.out.println("I am in controller:"+user);
 		if (user == null)
-			return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Object>("username or password incorrect", HttpStatus.NOT_FOUND);
 		
 		return new ResponseEntity<Object>(user, HttpStatus.OK);
 	}
