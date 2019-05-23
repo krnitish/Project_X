@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.projectx.dao.ArticleDao;
 import com.projectx.entity.Article;
+import com.projectx.entity.Users;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -13,40 +14,43 @@ public class ArticleServiceImpl implements ArticleService {
 	ArticleDao dao;
 	
 	
+//	@Override
+//	public String addAtricle(Article article) {
+//		System.out.println("test1");
+//		return dao.populateArticle(article);
+//		
+//	}
+//
+//	@Override
+//	public void showArticle(int id) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public void deleteArticle(int id) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public void showAllArticle() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public void modifyArticle(int id) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
 	@Override
-	public String addAtricle(Article article) {
-		System.out.println("test1");
-		return dao.populateArticle(article);
-		
-	}
-
-	@Override
-	public void showArticle(int id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteArticle(int id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void showAllArticle() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void modifyArticle(int id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String checkLogin(String id, String pwd) {
-		return dao.checkLogin(id, pwd);
+	public Users checkLogin(String id, String pwd) {
+		Users user=dao.checkLogin(id, pwd);
+		System.out.println("In service class");
+		System.out.println(user);
+		return user;
 	}
 
 }

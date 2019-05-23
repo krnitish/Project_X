@@ -1,25 +1,23 @@
 package com.projectx.entity;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.validation.annotation.Validated;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
-@Validated
 @Entity
-public class Users {
+public class Users{
 
 	@Id
-	private String username;
+	private String userid;
 	@NotEmpty
-	private String pwd;
+	private String password;
 	@NotEmpty
-	private String fname;
-	@NotEmpty
-	private String lname;
 	private String role;
+	private String field_x;
 	
 	
 	public Users() {
@@ -27,53 +25,32 @@ public class Users {
 	}
 
 
-	public Users(String username, String pwd, String fname, String lname, String role) {
+	public Users(String userid, String password, String role, String field_x) {
 		super();
-		this.username = username;
-		this.pwd = pwd;
-		this.fname = fname;
-		this.lname = lname;
+		this.userid = userid;
+		this.password = password;
 		this.role = role;
+		this.field_x = field_x;
 	}
 
 
-	public String getUsername() {
-		return username;
+	public String getUserid() {
+		return userid;
 	}
 
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
 
-	public String getPwd() {
-		return pwd;
+	public String getPassword() {
+		return password;
 	}
 
 
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
-
-
-	public String getFname() {
-		return fname;
-	}
-
-
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
-
-
-	public String getLname() {
-		return lname;
-	}
-
-
-	public void setLname(String lname) {
-		this.lname = lname;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 
@@ -87,11 +64,18 @@ public class Users {
 	}
 
 
+	public String getField_x() {
+		return field_x;
+	}
+
+
+	public void setField_x(String field_x) {
+		this.field_x = field_x;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Users [username=" + username + ", pwd=" + pwd + ", fname=" + fname + ", lname=" + lname + ", role="
-				+ role + "]";
+		return "Users [userid=" + userid + ", password=" + password + ", role=" + role + ", field_x=" + field_x + "]";
 	}
-	
-	
 }
