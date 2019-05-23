@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,13 +36,14 @@ public class AppController {
 	@Autowired
 	ArticleService service;
 	
+	@CrossOrigin
 	@RequestMapping("/")
 	public String  greet()
 	{
 		System.out.println("greet");
 		return "Welcome";
 	}
-	
+	@CrossOrigin
 	@PostMapping("/createuser")
 	public String createUser(@RequestBody Users user)
 	{
@@ -56,6 +58,7 @@ public class AppController {
 		return "user created";
 	}
 	@PostMapping("/login")
+	@CrossOrigin
 	public ResponseEntity<Object> loginCheck(@RequestBody LoginInfo info)
 	{
 		System.out.println("username: "+info.getUsername()+" Password: "+info.getPassword());
@@ -67,6 +70,7 @@ public class AppController {
 		
 		return new ResponseEntity<Object>(user, HttpStatus.OK);
 	}
+	@CrossOrigin
 	@GetMapping("/getAllUsers")
 	public List<Users> findAllUsers()
 	{
