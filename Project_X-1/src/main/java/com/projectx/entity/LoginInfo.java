@@ -2,25 +2,25 @@ package com.projectx.entity;
 
 public class LoginInfo {
 
-	private String username;
+	private String userid;
 	private String password;
 	
 	public LoginInfo() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public LoginInfo(String username, String password) {
+	public LoginInfo(String userid, String password) {
 		super();
-		this.username = username;
+		this.userid = userid;
 		this.password = password;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserid() {
+		return userid;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
 	public String getPassword() {
@@ -33,8 +33,7 @@ public class LoginInfo {
 
 	@Override
 	public String toString() {
-		return "LoginInfo [username=" + username + ", password=" + password + "]";
+		return "LoginInfo [userid=" + userid + ", password=" + password + "]";
 	}
-	
-	
+		
 }

@@ -61,8 +61,8 @@ public class AppController {
 	@CrossOrigin
 	public ResponseEntity<Object> loginCheck(@RequestBody LoginInfo info)
 	{
-		System.out.println("username: "+info.getUsername()+" Password: "+info.getPassword());
-		Users user=service.checkLogin(info.getUsername(), info.getPassword());
+		System.out.println("username: "+info.getUserid()+" Password: "+info.getPassword());
+		Users user=service.checkLogin(info.getUserid(), info.getPassword());
 		user.setPassword("******");
 		System.out.println("I am in controller:"+user);
 		if (user == null)
