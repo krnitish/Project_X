@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projectx.entity.Article;
+import com.projectx.entity.HttpStatusMessage;
 import com.projectx.entity.LoginInfo;
 import com.projectx.entity.Users;
 import com.projectx.repository.AppRepository;
@@ -63,10 +64,17 @@ public class AppController {
 	{
 		System.out.println("username: "+info.getUserid()+" Password: "+info.getPassword());
 		Users user=service.checkLogin(info.getUserid(), info.getPassword());
-		user.setPassword("******");
-		System.out.println("I am in controller:"+user);
+		if(user!=null)
+		{
+			user.setPassword("******");
+		}
+		System.out.println("I am in controller:");
 		if (user == null)
-			return new ResponseEntity<Object>("username or password incorrect", HttpStatus.NOT_FOUND);
+		{
+			HttpStatusMessage msg=new HttpStatusMessage();
+			msg.setMessage("username or password invalid");
+			return new ResponseEntity<Object>(msg, HttpStatus.NOT_FOUND);
+		}
 		
 		return new ResponseEntity<Object>(user, HttpStatus.OK);
 	}

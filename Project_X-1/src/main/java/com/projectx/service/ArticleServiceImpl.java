@@ -48,9 +48,15 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public Users checkLogin(String id, String pwd) {
 		Users user=dao.checkLogin(id, pwd);
+		if(user!=null)
+		{
+			System.out.println("In service class");
+			System.out.println(user);
+			return user;
+		}
 		System.out.println("In service class");
-		System.out.println(user);
-		return user;
+		//System.out.println(user);
+		return null;
 	}
 
 }
