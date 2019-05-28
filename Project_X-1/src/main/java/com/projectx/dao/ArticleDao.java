@@ -1,5 +1,9 @@
 package com.projectx.dao;
 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
+
 import com.projectx.entity.Article;
 import com.projectx.entity.Users;
 
@@ -9,5 +13,6 @@ public interface ArticleDao {
 //	
 //	public void searchArticle(int id);
 //	
-	public Users checkLogin(String id,String pwd);
+	@Query(value = "select fname, lname, email, role from Users where userid=? and password= ?", nativeQuery = true)
+	public Users checkLogin(String userid, String password);
 }

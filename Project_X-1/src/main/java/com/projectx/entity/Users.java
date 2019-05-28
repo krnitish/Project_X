@@ -4,6 +4,7 @@ package com.projectx.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -19,6 +20,11 @@ public class Users{
 	private String password;
 	@NotEmpty
 	private String role;
+	@NotEmpty
+	private String firstname;
+	private String lastname;
+	@Email
+	private String email;
 	private String field_x;
 	
 	
@@ -27,11 +33,15 @@ public class Users{
 	}
 
 
-	public Users(String userid, String password, String role, String field_x) {
+	public Users(String userid, @NotEmpty String password, @NotEmpty String role, @NotEmpty String firstname,
+			String lastname, @Email String email, String field_x) {
 		super();
 		this.userid = userid;
 		this.password = password;
 		this.role = role;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
 		this.field_x = field_x;
 	}
 
@@ -66,6 +76,36 @@ public class Users{
 	}
 
 
+	public String getFirstname() {
+		return firstname;
+	}
+
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+
+	public String getLastname() {
+		return lastname;
+	}
+
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
 	public String getField_x() {
 		return field_x;
 	}
@@ -78,6 +118,8 @@ public class Users{
 
 	@Override
 	public String toString() {
-		return "Users [userid=" + userid + ", password=" + password + ", role=" + role + ", field_x=" + field_x + "]";
+		return "Users [userid=" + userid + ", password=" + password + ", role=" + role + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", email=" + email + ", field_x=" + field_x + "]";
 	}
+	
 }

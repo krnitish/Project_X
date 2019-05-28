@@ -64,18 +64,15 @@ public class AppController {
 	{
 		System.out.println("username: "+info.getUserid()+" Password: "+info.getPassword());
 		Users user=service.checkLogin(info.getUserid(), info.getPassword());
-		if(user!=null)
-		{
-			user.setPassword("******");
-		}
+		
 		System.out.println("I am in controller:");
-		if (user == null)
+		if (user==null)
 		{
 			HttpStatusMessage msg=new HttpStatusMessage();
 			msg.setMessage("username or password invalid");
-			return new ResponseEntity<Object>(msg, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Object>(msg, HttpStatus.UNAUTHORIZED);
 		}
-		
+		user.setPassword("********");
 		return new ResponseEntity<Object>(user, HttpStatus.OK);
 	}
 	@CrossOrigin

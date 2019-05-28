@@ -1,6 +1,7 @@
 package com.projectx.dao;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -12,6 +13,8 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.projectx.entity.Article;
@@ -69,18 +72,15 @@ public class ArticleDaoImpl implements ArticleDao{
 //		}
 //	}
 //
+	@Query(value = "select fname, lname, email, role from Users where userid=? and password= ?", nativeQuery = true)
 	@Override
-	public Users checkLogin(String id, String pwd) {
-		if(repo.existsById(id))
+	public Users checkLogin(String userid, String password) {
+		System.out.println("User id : "+ userid+ "\nPassword : "+password);
+		Users user=repo.getOne(userid);
+		if(user.getPassword().equals(password))
 		{
-			Users user=repo.getOne(id);
-			if(user.getPassword().equals(pwd))
-			{
-				return user;
-			}
-		
+			return user;
 		}
-		return null;
+			return null;
 	}
-
 }
