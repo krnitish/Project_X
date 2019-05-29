@@ -13,6 +13,7 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -28,6 +29,9 @@ public class ArticleDaoImpl implements ArticleDao{
 
 	@Autowired
 	AppRepository repo;
+	
+	@Autowired
+	Environment env;
 //	
 //	@Override
 //	public String populateArticle(Article article) {
@@ -82,9 +86,16 @@ public class ArticleDaoImpl implements ArticleDao{
 		{
 			Users user=repo.getOne(userid);
 			String encryptedPwd=user.getPassword();
-			String decryptedPwd=AES.decrypt(encryptedPwd, "iamdon");
-			if(user.getPassword().equals(password));
-			return user;
+			System.out.println("Encrypted: "+encryptedPwd);
+			String decryptedPwd=AES.decrypt(encryptedPwd, env.getProperty("secretkey"));
+			System.out.println("Decrypted: "+decryptedPwd);
+			if(decryptedPwd.equals(password))
+			{
+				return user;
+			}else {
+				return null;
+			}
+			
 		}
 		else {
 			return null;

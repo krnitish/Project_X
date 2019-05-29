@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,6 +35,9 @@ public class AppController {
 	@Autowired
 	ArticleService service;
 	
+	@Autowired
+	Environment env;
+	
 	@CrossOrigin
 	@RequestMapping("/")
 	public String  greet()
@@ -40,19 +45,18 @@ public class AppController {
 		System.out.println("greet");
 		return "Welcome";
 	}
-	String secretKey="iamdon";
+	
 	@CrossOrigin
 	@PostMapping("/createuser")
 	public String createUser(@RequestBody Users user)
 	{
+		
 		String pwd=user.getPassword();
-		String encryptedString = AES.encrypt(pwd, secretKey) ;
+		String encryptedString = AES.encrypt(pwd, env.getProperty("secretkey")) ;
 		user.setPassword(encryptedString);
 		System.out.println("before checking");
 			if(repo.existsById(user.getUserid()))
-			{
-				System.out.println("in if condition");
-				
+			{				
 				return "user already exists";
 			}
 		repo.save(user);
@@ -64,8 +68,7 @@ public class AppController {
 	{
 		System.out.println("username: "+info.getUserid()+" Password: "+info.getPassword());
 		Users user=service.checkLogin(info.getUserid(), info.getPassword());
-		
-		System.out.println("I am in controller:");
+	
 		if (user==null)
 		{
 			HttpStatusMessage msg=new HttpStatusMessage();
@@ -99,10 +102,10 @@ public class AppController {
 //	@Autowired
 //	private Environment env;
 //	
-//	@GetMapping("/checkPro")
-//	public String checkProperty()
-//	{
-//		String name=env.getProperty("name");
-//		return name;
-//	}
+	@GetMapping("/checkPro")
+	public String checkProperty()
+	{
+		String name=env.getProperty("name");
+		return name;
+	}
 }
