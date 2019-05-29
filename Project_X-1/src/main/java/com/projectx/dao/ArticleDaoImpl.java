@@ -17,6 +17,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.projectx.encrypt.AES;
 import com.projectx.entity.Article;
 import com.projectx.entity.Users;
 import com.projectx.repository.AppRepository;
@@ -80,6 +81,8 @@ public class ArticleDaoImpl implements ArticleDao{
 		if(repo.existsById(userid))
 		{
 			Users user=repo.getOne(userid);
+			String encryptedPwd=user.getPassword();
+			String decryptedPwd=AES.decrypt(encryptedPwd, "iamdon");
 			if(user.getPassword().equals(password));
 			return user;
 		}

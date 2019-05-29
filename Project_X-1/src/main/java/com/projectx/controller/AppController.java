@@ -5,20 +5,16 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projectx.entity.Article;
+import com.projectx.encrypt.AES;
 import com.projectx.entity.HttpStatusMessage;
 import com.projectx.entity.LoginInfo;
 import com.projectx.entity.Users;
@@ -44,10 +40,14 @@ public class AppController {
 		System.out.println("greet");
 		return "Welcome";
 	}
+	String secretKey="iamdon";
 	@CrossOrigin
 	@PostMapping("/createuser")
 	public String createUser(@RequestBody Users user)
 	{
+		String pwd=user.getPassword();
+		String encryptedString = AES.encrypt(pwd, secretKey) ;
+		user.setPassword(encryptedString);
 		System.out.println("before checking");
 			if(repo.existsById(user.getUserid()))
 			{
