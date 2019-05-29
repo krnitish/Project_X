@@ -72,15 +72,20 @@ public class ArticleDaoImpl implements ArticleDao{
 //		}
 //	}
 //
-	@Query(value = "select fname, lname, email, role from Users where userid=? and password= ?", nativeQuery = true)
+	//@Query(value = "select fname, lname, email, role from Users where userid=? and password= ?", nativeQuery = true)
 	@Override
 	public Users checkLogin(String userid, String password) {
 		System.out.println("User id : "+ userid+ "\nPassword : "+password);
-		Users user=repo.getOne(userid);
-		if(user.getPassword().equals(password))
+		
+		if(repo.existsById(userid))
 		{
+			Users user=repo.getOne(userid);
+			if(user.getPassword().equals(password));
 			return user;
 		}
+		else {
 			return null;
+		}
+			
 	}
 }
