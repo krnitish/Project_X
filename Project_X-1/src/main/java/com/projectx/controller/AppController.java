@@ -72,8 +72,8 @@ public class AppController {
 		if (user == null)
 		{
 			HttpStatusMessage msg=new HttpStatusMessage();
-			msg.setMessage("username or password invalid");
-			return new ResponseEntity<Object>(msg, HttpStatus.NOT_FOUND);
+			msg.setStatusText("username or password invalid");
+			return new ResponseEntity<Object>(msg, HttpStatus.UNAUTHORIZED);
 		}
 		
 		return new ResponseEntity<Object>(user, HttpStatus.OK);

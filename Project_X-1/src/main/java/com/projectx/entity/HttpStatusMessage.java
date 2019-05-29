@@ -2,23 +2,24 @@ package com.projectx.entity;
 
 public class HttpStatusMessage {
 
-	private String message;
+	private String statusText;
 	public HttpStatusMessage() {
 		// TODO Auto-generated constructor stub
 	}
-	public HttpStatusMessage(String message) {
+	public HttpStatusMessage(String statusText) {
 		super();
-		this.message = message;
+		this.statusText = statusText;
 	}
-	public String getMessage() {
-		return message;
+	public String getStatusText() {
+		return statusText;
 	}
-	public void setMessage(String message) {
-		this.message = message;
+	public void setStatusText(String statusText) {
+		this.statusText = statusText;
 	}
 	@Override
 	public String toString() {
-		return "HttpStatus [message=" + message + "]";
+		return "HttpStatusMessage [statusText=" + statusText + "]";
 	}
+	
 	
 }
