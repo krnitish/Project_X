@@ -1,5 +1,7 @@
 package com.projectx.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,16 +49,8 @@ public class ArticleServiceImpl implements ArticleService {
 //
 	@Override
 	public Users checkLogin(String id, String pwd) {
-		Users user=dao.checkLogin(id, pwd);
-		if(user!=null)
-		{
-			System.out.println("In service class");
-			System.out.println(user);
-			return user;
-		}
-		System.out.println("In service class");
-		//System.out.println(user);
-		return null;
+		
+		return dao.checkLogin(id, pwd);
 	}
 
 }
