@@ -12,9 +12,9 @@ import com.projectx.entity.Users;
 @Service
 public class ArticleServiceImpl implements ArticleService {
 
-	@Autowired
-	ArticleDao dao;
-	
+//	@Autowired
+//	ArticleDao dao;
+//	
 	
 //	@Override
 //	public String addAtricle(Article article) {
@@ -47,10 +47,10 @@ public class ArticleServiceImpl implements ArticleService {
 //		
 //	}
 //
-	@Override
-	public Users checkLogin(String id, String pwd) {
-		
-		return dao.checkLogin(id, pwd);
-	}
+//	@Override
+//	public Users checkLogin(String id, String pwd) {
+//		
+//		return dao.checkLogin(id, pwd);
+	
 
 }

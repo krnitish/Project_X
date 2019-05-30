@@ -21,17 +21,12 @@ import org.springframework.stereotype.Repository;
 import com.projectx.encrypt.AES;
 import com.projectx.entity.Article;
 import com.projectx.entity.Users;
-import com.projectx.repository.AppRepository;
+import com.projectx.repository.UserRepository;
 
 @Repository
 @Transactional
 public class ArticleDaoImpl implements ArticleDao{
 
-	@Autowired
-	AppRepository repo;
-	
-	@Autowired
-	Environment env;
 //	
 //	@Override
 //	public String populateArticle(Article article) {
@@ -78,28 +73,7 @@ public class ArticleDaoImpl implements ArticleDao{
 //	}
 //
 	//@Query(value = "select fname, lname, email, role from Users where userid=? and password= ?", nativeQuery = true)
-	@Override
-	public Users checkLogin(String userid, String password) {
-		System.out.println("User id : "+ userid+ "\nPassword : "+password);
-		
-		if(repo.existsById(userid))
-		{
-			Users user=repo.getOne(userid);
-			String encryptedPwd=user.getPassword();
-			System.out.println("Encrypted: "+encryptedPwd);
-			String decryptedPwd=AES.decrypt(encryptedPwd, env.getProperty("secretkey"));
-			System.out.println("Decrypted: "+decryptedPwd);
-			if(decryptedPwd.equals(password))
-			{
-				return user;
-			}else {
-				return null;
-			}
+	
 			
-		}
-		else {
-			return null;
-		}
-			
-	}
+	
 }

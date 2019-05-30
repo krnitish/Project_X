@@ -8,14 +8,24 @@ import java.util.Base64;
  
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
- 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Env;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Service;
+
+@Service
 public class AES {
  
     private static SecretKeySpec secretKey;
     static byte[] key;
     
- 
-    public static void setKey(String myKey)
+    @Autowired
+    Environment env;
+    
+    private String secret;
+   
+	public void setKey(String myKey)
     {
         MessageDigest sha = null;
         try {
@@ -33,10 +43,11 @@ public class AES {
         }
     }
  
-    public static String encrypt(String strToEncrypt, String secret)
+    public String encrypt(String strToEncrypt)
     {
         try
         {
+        	secret=env.getProperty("secretKey");
             setKey(secret);
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
@@ -49,10 +60,11 @@ public class AES {
         return null;
     }
  
-    public static String decrypt(String strToDecrypt, String secret)
+    public String decrypt(String strToDecrypt)
     {
         try
         {
+        	secret=env.getProperty("secretKey");
             setKey(secret);
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
             cipher.init(Cipher.DECRYPT_MODE, secretKey);

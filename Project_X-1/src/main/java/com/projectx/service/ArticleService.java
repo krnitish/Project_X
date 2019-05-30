@@ -3,10 +3,12 @@ package com.projectx.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.projectx.dao.ArticleDao;
 import com.projectx.entity.Article;
 import com.projectx.entity.Users;
+
 
 public interface ArticleService {
 
@@ -21,5 +23,5 @@ public interface ArticleService {
 //	
 //	public void modifyArticle(int id);
 //	
-	public Users checkLogin(String id, String pwd);
+//	public Users checkLogin(String id, String pwd);
 }
