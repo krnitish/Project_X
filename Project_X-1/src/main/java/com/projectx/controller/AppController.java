@@ -46,12 +46,12 @@ public class AppController {
 	}
 
 	@CrossOrigin
-	@PostMapping("/createuser")
+	@PostMapping("/user/register")
 	public String createUser(@RequestBody Users user) {
 		return service.createUser(user);
 	}
 
-	@PostMapping("/login")
+	@PostMapping("/user/login")
 	@CrossOrigin
 	public ResponseEntity<Object> loginCheck(@RequestBody LoginInfo info) {
 		System.out.println("username: " + info.getUserid() + " Password: " + info.getPassword());
@@ -69,7 +69,7 @@ public class AppController {
 	}
 
 	@CrossOrigin
-	@GetMapping("/getAllUsers")
+	@GetMapping("/user/all")
 	public List<Users> findAllUsers() {
 		return repo.findAll();
 	}
