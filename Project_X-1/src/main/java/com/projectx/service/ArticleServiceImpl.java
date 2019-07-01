@@ -25,8 +25,7 @@ public class ArticleServiceImpl implements ArticleService {
 	
 	public Iterable<Article> getAll() {
 		return art.findAll();
-		
-	}
+		}
 
 //	@Autowired
 //	ArticleDao dao;
