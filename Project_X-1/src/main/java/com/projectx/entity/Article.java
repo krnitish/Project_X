@@ -1,17 +1,21 @@
 package com.projectx.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.solr.core.mapping.Indexed;
+import org.springframework.data.solr.core.mapping.SolrDocument;
 
-@Entity
+@SolrDocument(collection="Article")
 public class Article {
 
-	@Id
+	
 	//@GeneratedValue(strategy = GenerationType.AUTO)
+	
+	@Id
+	@Indexed(name = "aid", type = "int")
 	private int atricleId;
-	@NotEmpty
+	@Indexed(name = "articleTitle", type = "string")
 	private String atricleTitle;
+	@Indexed(name = "aSolution", type = "string")
 	private String articleSolution;
 	
 	public Article() {

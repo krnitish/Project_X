@@ -12,9 +12,10 @@ import com.projectx.entity.Users;
 
 public interface ArticleService {
 
-	
-//	public String addAtricle(Article article);
+	public Article addAtricle(Article article);
 //	
+	
+	public Iterable<Article> getAll();
 //	public void showArticle(int id);
 //	
 //	public void deleteArticle(int id);
@@ -25,3 +26,6 @@ public interface ArticleService {
 //	
 //	public Users checkLogin(String id, String pwd);
 }
+
+
+

@@ -14,5 +14,8 @@ public interface ArticleDao {
 //	public void searchArticle(int id);
 //	
 	//@Query(value = "select fname, lname, email, role from Users where userid=? and password= ?", nativeQuery = true)
+
+	public Article saveUser(Article article);
 	
+	public Iterable<Article> findAll();
 }

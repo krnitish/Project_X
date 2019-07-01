@@ -8,9 +8,25 @@ import org.springframework.stereotype.Service;
 import com.projectx.dao.ArticleDao;
 import com.projectx.entity.Article;
 import com.projectx.entity.Users;
+import com.projectx.repository.ArticleRepository;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
+
+	@Autowired
+	ArticleDao art;
+	
+	@Override
+	public Article addAtricle(Article article) {
+		// TODO Auto-generated method stub
+		art.saveUser(article);
+		return article;
+	}
+	
+	public Iterable<Article> getAll() {
+		return art.findAll();
+		
+	}
 
 //	@Autowired
 //	ArticleDao dao;

@@ -21,11 +21,28 @@ import org.springframework.stereotype.Repository;
 import com.projectx.encrypt.AES;
 import com.projectx.entity.Article;
 import com.projectx.entity.Users;
+import com.projectx.repository.ArticleRepository;
 import com.projectx.repository.UserRepository;
 
 @Repository
 @Transactional
 public class ArticleDaoImpl implements ArticleDao{
+
+	@Autowired
+	ArticleRepository repo;
+	
+	@Override
+	public Article saveUser(Article article) {
+		// TODO Auto-generated method stub
+		repo.save(article);
+		return article;
+	}
+	
+	public Iterable<Article> findAll()
+	{
+		return repo.findAll();
+		
+	}
 
 //	
 //	@Override

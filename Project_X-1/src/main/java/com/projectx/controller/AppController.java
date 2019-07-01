@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projectx.encrypt.AES;
+import com.projectx.entity.Article;
 import com.projectx.entity.HttpStatusMessage;
 import com.projectx.entity.LoginInfo;
 import com.projectx.entity.Users;
+import com.projectx.repository.ArticleRepository;
 import com.projectx.repository.UserRepository;
 import com.projectx.service.ArticleService;
 import com.projectx.service.UserService;
@@ -31,9 +33,12 @@ public class AppController {
 
 	@Autowired
 	UserRepository repo;
-
+	
 	@Autowired
 	UserService service;
+	
+	@Autowired
+	ArticleService artservice;
 
 	@Autowired
 	Environment env;
@@ -75,18 +80,19 @@ public class AppController {
 	}
 
 //	
-//	@PostMapping("/save")
-//	public String saveArticle(@RequestBody Article article)
-//	{
-//		System.out.println("test 0");
-//		return service.addAtricle(article);
-//	}
-//	
-//	@GetMapping("/get/{key}")
-//	public Article getArticle(@RequestParam String key)
-//	{
-//		return null;
-//	}
+	@PostMapping("/saveArticle")
+	public Article saveArticle(@RequestBody Article article)
+	{		
+		System.out.println("test 0");
+		return artservice.addAtricle(article);
+	}
+	
+@GetMapping("/getArticle")
+	public Iterable<Article> getArticle()
+	{
+	return artservice.getAll();
+			
+	}
 //	@Autowired
 //	private Environment env;
 //	
