@@ -1,8 +1,11 @@
 package com.projectx.controller;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,42 +24,49 @@ public class ArticleController {
 
 	@Autowired
 	ArticleService service;
-	
+
+	@CrossOrigin
 	@PostMapping("/save")
-	public Article saveArticle(@RequestBody Article article)
-	{
+	public Article saveArticle(@RequestBody Article article) {
 		return service.addAtricle(article);
 	}
-	
+
+	@CrossOrigin
 	@GetMapping("/getAll")
-	public Iterable<Article> getAllArticle()
-	{
-		return service.getAll();
+	public Iterable<Article> getAllArticle() {
+		Iterable<Article> list =  service.getAll();
+		
+		for (Article article : list) {
+			if(article.getArticleSolution().length()>30)
+			{
+				article.setArticleSolution(article.getArticleSolution().substring(0, 70)+"...");
+			}
+		}
+		
+		
+	return list;
 	}
-	
+
+	@CrossOrigin
 	@GetMapping("/getById/{id}")
-	public Optional<Article> getArticleById(@PathVariable("id") int id)
-	{
+	public Optional<Article> getArticleById(@PathVariable("id") int id) {
 		return service.getById(id);
 	}
-	
+
+	@CrossOrigin
 	@GetMapping("/runcmd")
-	public String runCommandLine()
-	{
-		  try
-	        { 
-	            // Just one line and you are done !  
-	            // We have given a command to start cmd 
-	            // /K : Carries out command specified by string 
-	           Runtime.getRuntime().exec(new String[] {"cmd", "/K", "Start"}); 
-	  
-	        } 
-	        catch (Exception e) 
-	        { 
-	            System.out.println("HEY Buddy ! U r Doing Something Wrong "); 
-	            e.printStackTrace(); 
-	        } 
-	    return "command line opened";
+	public String runCommandLine() {
+		try {
+			// Just one line and you are done !
+			// We have given a command to start cmd
+			// /K : Carries out command specified by string
+			Runtime.getRuntime().exec(new String[] { "cmd", "/K", "Start" });
+
+		} catch (Exception e) {
+			System.out.println("HEY Buddy ! U r Doing Something Wrong ");
+			e.printStackTrace();
+		}
+		return "command line opened";
 	}
-	
+
 }
