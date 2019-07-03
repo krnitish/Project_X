@@ -51,6 +51,12 @@ public class ArticleDaoImpl implements ArticleDao{
 		return repo.findById(id);
 	}
 
+	@Override
+	public String deleteById(Integer id) {
+		repo.deleteById(id);
+		return "deleted";
+	}
+
 //	
 //	@Override
 //	public String populateArticle(Article article) {

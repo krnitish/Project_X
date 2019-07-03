@@ -34,6 +34,12 @@ public class ArticleServiceImpl implements ArticleService {
 		return dao.getById(id);
 	}
 
+	@Override
+	public String deleteArticle(Integer id) {
+		dao.deleteById(id);
+		return "deleted";
+	}
+
 //	@Autowired
 //	ArticleDao dao;
 //	

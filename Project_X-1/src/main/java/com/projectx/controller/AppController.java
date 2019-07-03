@@ -88,7 +88,7 @@ public class AppController {
 		return artservice.addAtricle(article);
 	}
 	
-@GetMapping("/getArticle")
+	@GetMapping("/getArticle")
 	public Iterable<Article> getArticle()
 	{
 	return artservice.getAll();

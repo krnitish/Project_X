@@ -21,4 +21,6 @@ public interface ArticleDao {
 	public Iterable<Article> findAll();
 
 	public Optional<Article> getById(int id);
+
+	public String deleteById(Integer id);
 }

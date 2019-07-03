@@ -19,7 +19,7 @@ public interface ArticleService {
 	public Iterable<Article> getAll();
 //	public void showArticle(int id);
 //	
-//	public void deleteArticle(int id);
+	public String deleteArticle(Integer id);
 //	
 //	public void showAllArticle();
 //	

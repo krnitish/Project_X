@@ -1,18 +1,15 @@
 package com.projectx.controller;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projectx.entity.Article;
@@ -35,11 +32,11 @@ public class ArticleController {
 	@GetMapping("/getAll")
 	public Iterable<Article> getAllArticle() {
 		Iterable<Article> list =  service.getAll();
-		
+		//List<Article> alist=(List<Article>) service.getAll();
 		for (Article article : list) {
-			if(article.getArticleSolution().length()>30)
+			if(article.getArticleSolution().length()>200)
 			{
-				article.setArticleSolution(article.getArticleSolution().substring(0, 70)+"...");
+				article.setArticleSolution(article.getArticleSolution().substring(0, 200)+"...");
 			}
 		}
 		
@@ -51,6 +48,14 @@ public class ArticleController {
 	@GetMapping("/getById/{id}")
 	public Optional<Article> getArticleById(@PathVariable("id") int id) {
 		return service.getById(id);
+	}
+	
+	@CrossOrigin
+	@DeleteMapping("/delete/{id}")
+	public String deleteArticle(@PathVariable("id") int id)
+	{
+		Integer id1=id;
+		return service.deleteArticle(id1);
 	}
 
 	@CrossOrigin
