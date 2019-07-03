@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projectx.encrypt.AES;
 import com.projectx.entity.Article;
 import com.projectx.entity.HttpStatusMessage;
 import com.projectx.entity.LoginInfo;
@@ -26,6 +25,7 @@ import com.projectx.service.ArticleService;
 import com.projectx.service.UserService;
 
 @RestController
+@RequestMapping("/user")
 public class AppController {
 
 	@Autowired
@@ -69,14 +69,15 @@ public class AppController {
 
 			return new ResponseEntity<Object>(msg, HttpStatus.UNAUTHORIZED);
 		}
-		user.setPassword("********");
+		System.out.println(user);
 		return new ResponseEntity<Object>(user, HttpStatus.OK);
 	}
 
 	@CrossOrigin
-	@GetMapping("/user/all")
+	@GetMapping("/all")
 	public List<Users> findAllUsers() {
-		return repo.findAll();
+		List<Users> userList=repo.findAll();
+		return userList;
 	}
 
 //	

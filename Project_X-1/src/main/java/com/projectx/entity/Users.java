@@ -1,5 +1,6 @@
 package com.projectx.entity;
 
+import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,7 +8,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 @Entity
@@ -16,6 +21,7 @@ public class Users{
 
 	@Id
 	private String userid;
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@NotEmpty
 	private String password;
 	@NotEmpty
@@ -55,12 +61,12 @@ public class Users{
 		this.userid = userid;
 	}
 
-
+	
 	public String getPassword() {
 		return password;
 	}
 
-
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -121,5 +127,5 @@ public class Users{
 		return "Users [userid=" + userid + ", password=" + password + ", role=" + role + ", firstname=" + firstname
 				+ ", lastname=" + lastname + ", email=" + email + ", field_x=" + field_x + "]";
 	}
-	
+
 }

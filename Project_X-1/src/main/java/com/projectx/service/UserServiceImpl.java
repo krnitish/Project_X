@@ -3,9 +3,11 @@ package com.projectx.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.projectx.dao.UserDao;
 import com.projectx.encrypt.AES;
 import com.projectx.entity.Users;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,6 +25,7 @@ public class UserServiceImpl implements UserService {
 			Users user=dao.findById(userid);
 			String encryptedPwd = user.getPassword();
 			if(aes.decrypt(encryptedPwd).equals(password)) {
+				user.setPassword("-------------");
 				return user;
 			}
 			return null;

@@ -2,7 +2,6 @@ package com.projectx.dao;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -20,36 +19,35 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.projectx.encrypt.AES;
-import com.projectx.entity.Article;
+import com.projectx.entity.Title;
 import com.projectx.entity.Users;
-import com.projectx.repository.ArticleRepository;
+import com.projectx.repository.TitleRepository;
 import com.projectx.repository.UserRepository;
 
 @Repository
 @Transactional
-public class ArticleDaoImpl implements ArticleDao{
-
+public class TitleDaoImpl implements TitleDao{
+	
 	@Autowired
-	ArticleRepository repo;
-	
+	TitleRepository t;
+
 	@Override
-	public Article saveUser(Article article) {
-		// TODO Auto-generated method stub
-		repo.save(article);
-		return article;
+	public Title saveTitle(Title title) {
+		return t.save(title);
 	}
 	
-	public Iterable<Article> findAll()
-	{
-		return repo.findAll();
-		
+	@Override
+	public Title getTitle(String titleId) {
+		return t.getOne(titleId);
 	}
 
 	@Override
-	public Optional<Article> getById(int id) {
-		
-		return repo.findById(id);
+	public String deleteTitle(String titleId) {
+		t.deleteById(titleId);
+		return "deleted";
 	}
+
+	
 
 //	
 //	@Override

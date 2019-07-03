@@ -1,6 +1,7 @@
 package com.projectx.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 
@@ -18,4 +19,6 @@ public interface ArticleDao {
 	public Article saveUser(Article article);
 	
 	public Iterable<Article> findAll();
+
+	public Optional<Article> getById(int id);
 }

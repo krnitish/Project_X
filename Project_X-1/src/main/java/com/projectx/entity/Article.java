@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.mapping.Indexed;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 
-@SolrDocument(collection="Article")
+@SolrDocument(collection="article")
 public class Article {
 
 	
@@ -12,9 +12,9 @@ public class Article {
 	
 	@Id
 	@Indexed(name = "aid", type = "int")
-	private int atricleId;
+	private int articleId;
 	@Indexed(name = "articleTitle", type = "string")
-	private String atricleTitle;
+	private String articleTitle;
 	@Indexed(name = "aSolution", type = "string")
 	private String articleSolution;
 	
@@ -22,27 +22,27 @@ public class Article {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Article(int atricleId, String atricleTitle, String articleSolution) {
+	public Article(int articleId, String articleTitle, String articleSolution) {
 		super();
-		this.atricleId = atricleId;
-		this.atricleTitle = atricleTitle;
+		this.articleId = articleId;
+		this.articleTitle = articleTitle;
 		this.articleSolution = articleSolution;
 	}
 
-	public int getAtricleId() {
-		return atricleId;
+	public int getArticleId() {
+		return articleId;
 	}
 
-	public void setAtricleId(int atricleId) {
-		this.atricleId = atricleId;
+	public void setArticleId(int articleId) {
+		this.articleId = articleId;
 	}
 
-	public String getAtricleTitle() {
-		return atricleTitle;
+	public String getArticleTitle() {
+		return articleTitle;
 	}
 
-	public void setAtricleTitle(String atricleTitle) {
-		this.atricleTitle = atricleTitle;
+	public void setArticleTitle(String articleTitle) {
+		this.articleTitle = articleTitle;
 	}
 
 	public String getArticleSolution() {
@@ -55,8 +55,10 @@ public class Article {
 
 	@Override
 	public String toString() {
-		return "Article [atricleId=" + atricleId + ", atricleTitle=" + atricleTitle + ", articleSolution="
+		return "Article [articleId=" + articleId + ", articleTitle=" + articleTitle + ", articleSolution="
 				+ articleSolution + "]";
 	}
+
+	
 	
 }

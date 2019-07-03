@@ -1,42 +1,30 @@
 package com.projectx.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projectx.dao.ArticleDao;
-import com.projectx.entity.Article;
-import com.projectx.entity.Users;
-import com.projectx.repository.ArticleRepository;
+import com.projectx.dao.TitleDao;
+import com.projectx.entity.Title;
 
 @Service
-public class ArticleServiceImpl implements ArticleService {
+public class TitleServiceImpl implements TitleService {
 
 	@Autowired
-	ArticleDao dao;
-	
+	TitleDao titleDao;
+
 	@Override
-	public Article addAtricle(Article article) {
+	public Title addTitle(Title title) {
 		// TODO Auto-generated method stub
-		dao.saveUser(article);
-		return article;
+		return null;
 	}
-	
-	public Iterable<Article> getAll() {
-		return dao.findAll();
-		}
 
 	@Override
-	public Optional<Article> getById(int id) {
-		
-		return dao.getById(id);
+	public List<Title> showTitle() {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-//	@Autowired
-//	ArticleDao dao;
-//	
 	
 //	@Override
 //	public String addAtricle(Article article) {
