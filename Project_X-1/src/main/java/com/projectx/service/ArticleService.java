@@ -20,6 +20,8 @@ public interface ArticleService {
 //	public void showArticle(int id);
 //	
 	public String deleteArticle(Integer id);
+	
+	public String deleteAll();
 //	
 //	public void showAllArticle();
 //	
@@ -28,6 +30,8 @@ public interface ArticleService {
 //	public Users checkLogin(String id, String pwd);
 
 	public Optional<Article> getById(int id);
+	
+	
 }
 
 
