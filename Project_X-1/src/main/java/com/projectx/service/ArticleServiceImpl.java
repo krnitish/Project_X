@@ -19,7 +19,6 @@ public class ArticleServiceImpl implements ArticleService {
 	
 	@Override
 	public Article addAtricle(Article article) {
-		// TODO Auto-generated method stub
 		dao.saveUser(article);
 		return article;
 	}

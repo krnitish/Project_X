@@ -1,8 +1,10 @@
 package com.projectx.controller;
 
+import java.io.File;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,9 @@ public class ArticleController {
 
 	@Autowired
 	ArticleService service;
+	
+	@Autowired
+	Environment env;
 
 	@CrossOrigin
 	@PostMapping("/save")
@@ -34,10 +39,17 @@ public class ArticleController {
 		Iterable<Article> list =  service.getAll();
 		//List<Article> alist=(List<Article>) service.getAll();
 		for (Article article : list) {
-			if(article.getArticleSolution().length()>200)
+			for(String str: article.getArticleSolution())
 			{
-				article.setArticleSolution(article.getArticleSolution().substring(0, 200)+"...");
+				if(str.length()>200)
+				{
+					str.substring(0, 200);
+				}
 			}
+//			if(article.getArticleSolution()..length()>200)
+//			{
+//				article.setArticleSolution(article.getArticleSolution().substring(0, 200)+"...");
+//			}
 		}
 		
 		
@@ -59,16 +71,15 @@ public class ArticleController {
 	}
 
 	@CrossOrigin
-	@GetMapping("/runcmd")
+	@GetMapping("/startsolr")
 	public String runCommandLine() {
+		
 		try {
-			// Just one line and you are done !
-			// We have given a command to start cmd
-			// /K : Carries out command specified by string
-			Runtime.getRuntime().exec(new String[] { "cmd", "/K", "Start" });
-
+			Runtime rt = Runtime.getRuntime();
+			String solrpath=env.getProperty("solrpath");
+			rt.exec("cmd.exe /c start solr start", null, new File(solrpath));
+			
 		} catch (Exception e) {
-			System.out.println("HEY Buddy ! U r Doing Something Wrong ");
 			e.printStackTrace();
 		}
 		return "command line opened";

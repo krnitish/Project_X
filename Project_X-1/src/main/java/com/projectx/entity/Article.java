@@ -1,28 +1,30 @@
 package com.projectx.entity;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.mapping.Indexed;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 
-@SolrDocument(collection="article")
+@SolrDocument(collection="article1")
 public class Article {
 
 	
 	//@GeneratedValue(strategy = GenerationType.AUTO)
 	
 	@Id
-	@Indexed(name = "aid", type = "int")
+	@Indexed(name = "id", type = "int")
 	private int articleId;
 	@Indexed(name = "articleTitle", type = "string")
 	private String articleTitle;
 	@Indexed(name = "aSolution", type = "string")
-	private String articleSolution;
+	private List<String> articleSolution;
 	
 	public Article() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Article(int articleId, String articleTitle, String articleSolution) {
+	public Article(int articleId, String articleTitle, List<String> articleSolution) {
 		super();
 		this.articleId = articleId;
 		this.articleTitle = articleTitle;
@@ -45,11 +47,11 @@ public class Article {
 		this.articleTitle = articleTitle;
 	}
 
-	public String getArticleSolution() {
+	public List<String> getArticleSolution() {
 		return articleSolution;
 	}
 
-	public void setArticleSolution(String articleSolution) {
+	public void setArticleSolution(List<String> articleSolution) {
 		this.articleSolution = articleSolution;
 	}
 
@@ -58,7 +60,5 @@ public class Article {
 		return "Article [articleId=" + articleId + ", articleTitle=" + articleTitle + ", articleSolution="
 				+ articleSolution + "]";
 	}
-
-	
 	
 }
