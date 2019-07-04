@@ -40,6 +40,12 @@ public class ArticleServiceImpl implements ArticleService {
 		return "deleted";
 	}
 
+	@Override
+	public String deleteAll() {
+		
+		return dao.deleteAll();
+	}
+
 //	@Autowired
 //	ArticleDao dao;
 //	

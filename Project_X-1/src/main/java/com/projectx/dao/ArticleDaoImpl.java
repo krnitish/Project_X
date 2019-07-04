@@ -57,6 +57,12 @@ public class ArticleDaoImpl implements ArticleDao{
 		return "deleted";
 	}
 
+	@Override
+	public String deleteAll() {
+		repo.deleteAll();
+		return "Collection deleted";
+	}
+
 //	
 //	@Override
 //	public String populateArticle(Article article) {

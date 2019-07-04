@@ -23,4 +23,6 @@ public interface ArticleDao {
 	public Optional<Article> getById(int id);
 
 	public String deleteById(Integer id);
+	
+	public String deleteAll();
 }

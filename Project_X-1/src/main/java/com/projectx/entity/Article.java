@@ -1,8 +1,14 @@
 package com.projectx.entity;
 
+import javax.annotation.Generated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.mapping.Indexed;
 import org.springframework.data.solr.core.mapping.SolrDocument;
+
 
 @SolrDocument(collection="article")
 public class Article {
@@ -11,12 +17,13 @@ public class Article {
 	//@GeneratedValue(strategy = GenerationType.AUTO)
 	
 	@Id
-	@Indexed(name = "aid", type = "int")
+	@Indexed(name = "id", type = "int")
 	private int articleId;
 	@Indexed(name = "articleTitle", type = "string")
 	private String articleTitle;
 	@Indexed(name = "aSolution", type = "string")
-	private String articleSolution;
+	private String articleSolution ;
+	
 	
 	public Article() {
 		// TODO Auto-generated constructor stub
@@ -27,6 +34,7 @@ public class Article {
 		this.articleId = articleId;
 		this.articleTitle = articleTitle;
 		this.articleSolution = articleSolution;
+	
 	}
 
 	public int getArticleId() {
@@ -58,7 +66,6 @@ public class Article {
 		return "Article [articleId=" + articleId + ", articleTitle=" + articleTitle + ", articleSolution="
 				+ articleSolution + "]";
 	}
-
 	
 	
 }

@@ -57,6 +57,13 @@ public class ArticleController {
 		Integer id1=id;
 		return service.deleteArticle(id1);
 	}
+	
+	@CrossOrigin
+	@DeleteMapping("deleteAll")
+	public String deleteAll()
+	{
+		return service.deleteAll();
+	}
 
 	@CrossOrigin
 	@GetMapping("/runcmd")
