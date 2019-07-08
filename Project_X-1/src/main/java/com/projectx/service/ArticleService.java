@@ -31,6 +31,8 @@ public interface ArticleService {
 
 	public Optional<Article> getById(int id);
 	
+	public List<Article> searchArticleByKeyword(String keyword);
+	
 	
 }
 

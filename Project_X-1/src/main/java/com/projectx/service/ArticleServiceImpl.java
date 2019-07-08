@@ -1,5 +1,6 @@
 package com.projectx.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +44,29 @@ public class ArticleServiceImpl implements ArticleService {
 	public String deleteAll() {
 		
 		return dao.deleteAll();
+	}
+	
+	@Override
+	public List<Article> searchArticleByKeyword(String keyword)
+	{
+		List<Article> result=new ArrayList<Article>();
+		Iterable<Article> list=dao.findAll();
+		
+		for (Article article : list) {
+			if(article.getArticleTitle().toLowerCase().contains(keyword.toLowerCase()))
+			{
+				result.add(article);
+				continue;
+			}
+			List<String> solutionList=article.getArticleSolution();
+			for (String solution : solutionList) {
+				if(solution.toLowerCase().contains(keyword.toLowerCase()))
+				{
+					result.add(article);
+				}
+			}
+		}
+		return result;
 	}
 
 //	@Autowired

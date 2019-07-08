@@ -1,24 +1,18 @@
 package com.projectx.entity;
 
-<<<<<<< HEAD
+
 import java.util.List;
-=======
 import javax.annotation.Generated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.SequenceGenerator;
->>>>>>> branch 'master' of https://github.com/krnitish/Project_X.git
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.mapping.Indexed;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 
-<<<<<<< HEAD
-@SolrDocument(collection="article1")
-=======
 
 @SolrDocument(collection="article")
->>>>>>> branch 'master' of https://github.com/krnitish/Project_X.git
 public class Article {
 
 	
@@ -30,12 +24,11 @@ public class Article {
 	@Indexed(name = "articleTitle", type = "string")
 	private String articleTitle;
 	@Indexed(name = "aSolution", type = "string")
-<<<<<<< HEAD
+
 	private List<String> articleSolution;
-=======
-	private String articleSolution ;
-	
->>>>>>> branch 'master' of https://github.com/krnitish/Project_X.git
+
+
+
 	
 	public Article() {
 		// TODO Auto-generated constructor stub
@@ -78,9 +71,6 @@ public class Article {
 		return "Article [articleId=" + articleId + ", articleTitle=" + articleTitle + ", articleSolution="
 				+ articleSolution + "]";
 	}
-<<<<<<< HEAD
-=======
-	
->>>>>>> branch 'master' of https://github.com/krnitish/Project_X.git
+
 	
 }

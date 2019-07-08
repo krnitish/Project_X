@@ -1,6 +1,7 @@
 package com.projectx.controller;
 
 import java.io.File;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,13 +47,7 @@ public class ArticleController {
 					str.substring(0, 200);
 				}
 			}
-//			if(article.getArticleSolution()..length()>200)
-//			{
-//				article.setArticleSolution(article.getArticleSolution().substring(0, 200)+"...");
-//			}
 		}
-		
-		
 	return list;
 	}
 
@@ -71,10 +66,17 @@ public class ArticleController {
 	}
 	
 	@CrossOrigin
-	@DeleteMapping("deleteAll")
+	@DeleteMapping("/deleteAll")
 	public String deleteAll()
 	{
 		return service.deleteAll();
+	}
+	
+	@CrossOrigin
+	@GetMapping("/getArticle/{keyword}")
+	public List<Article> searchArticleByKeyword(@PathVariable("keyword") String keyword)
+	{
+		return service.searchArticleByKeyword(keyword);
 	}
 
 	@CrossOrigin
