@@ -24,6 +24,7 @@ public class ArticleServiceImpl implements ArticleService {
 		return article;
 	}
 	
+	
 	public Iterable<Article> getAll() {
 		return dao.findAll();
 		}

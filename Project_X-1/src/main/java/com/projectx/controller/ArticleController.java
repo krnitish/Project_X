@@ -1,6 +1,8 @@
 package com.projectx.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +23,8 @@ import com.projectx.service.ArticleService;
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
+	
+	Process p;
 
 	@Autowired
 	ArticleService service;
@@ -81,17 +85,40 @@ public class ArticleController {
 
 	@CrossOrigin
 	@GetMapping("/startsolr")
-	public String runCommandLine() {
+	public String startSolr() {
 		
 		try {
 			Runtime rt = Runtime.getRuntime();
 			String solrpath=env.getProperty("solrpath");
-			rt.exec("cmd.exe /c start solr start", null, new File(solrpath));
+			String solrportno=env.getProperty("solrportno");
+				  try (ServerSocket ignored = new ServerSocket(8983)) {
+					  System.out.println("starting solr..");
+					  p=rt.exec("cmd.exe /c start solr start -p "+solrportno, null, new File(solrpath));
+					  System.out.println("process output: "+p);
+				      return "starting solr..";
+				  } catch (IOException e) {
+					  System.out.println("already running!!");
+					  System.out.println("process: "+p);
+					  return "already running!!";
+				  }
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "command line opened";
+	}
+	
+	@CrossOrigin
+	@GetMapping("/stopsolr")
+	public String stopSolr()
+	{
+		try {
+			p.destroy();
+			System.out.println("destroying..");
+		}catch(Exception e){
+			System.out.println("exception: "+ e);
+		}
+		return "solr is stopping!!";
 	}
 
 }
